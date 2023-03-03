@@ -20,4 +20,8 @@ class RecipeCategoryController extends Controller
     public function getCategoryById($id) {
         return $this->recipeCategory->getCategoryById($id);
     }
+
+    public function getCategoryByAlias($alias) {
+        return $this->recipeCategory->getCategoryByAlias($alias);
+    }
 }

@@ -93,9 +93,9 @@ class RecipesController extends Controller
     }
 
     public function showRecipesByCategory(Request $request, RecipeCategoryController $recipeCategoryController) {
-        $category_id = $request->category;
-        $current_category = $recipeCategoryController->getCategoryById($category_id);
-        $recipes = $this->recipe->searchRecipesByCategory($category_id);
+        $category_alias = $request->category;
+        $current_category = $recipeCategoryController->getCategoryByAlias($category_alias);
+        $recipes = $this->recipe->getRecipesByCatName($category_alias);
         return view('recipe.category',[
            'recipes' => $recipes,
            'categories' => $this->categories,

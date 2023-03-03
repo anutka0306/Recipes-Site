@@ -44,6 +44,11 @@ class Recipe extends Model
         return $recipes;
     }
 
+    public function getRecipesByCatName($alias){
+        $cat_id = RecipeCategory::select('id')->where('alias', $alias)->first()->id;
+        return $this->searchRecipesByCategory($cat_id);
+    }
+
     public function searchRecipesByName($name) {
         $recipes = $this->getRecipesByName($name);
         foreach ($recipes as $recipe){

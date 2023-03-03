@@ -21,4 +21,8 @@ class RecipeCategory extends Model
         return RecipeCategory::where('id', $id)->limit(1)->get();
     }
 
+    public function getCategoryByAlias($alias) {
+        return RecipeCategory::where('alias', $alias)->first();
+    }
+
 }

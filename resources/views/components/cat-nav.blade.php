@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     @foreach($categories as $category)
-                        <a class="nav-link text-light" href="{{ route('category-recipes', ['category' => $category->id]) }}">{{ $category->name }}</a>
+                        <a class="nav-link text-light" href="{{ route('category-recipes', ['category' => $category->alias]) }}">{{ $category->name }}</a>
                     @endforeach
                 </div>
             </div>
