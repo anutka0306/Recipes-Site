@@ -45,3 +45,51 @@
     text-decoration: none;
     color: #1a202c;
 }
+
+/* Lastes Recipes */
+.latest__recipes{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.latest__recipes h2{
+    font-family: 'Native Brush';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.latest__recipes h2:before{
+    content: '';
+    display: block;
+    width: 100px;
+    height: 1px;
+    background-color: #999;
+    margin-right: 10px;
+}
+.latest__recipes h2:after{
+    content: '';
+    display: block;
+    width: 100px;
+    height: 1px;
+    background-color: #999;
+    margin-left: 10px;
+}
+.latest__recipes_item{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.latest__recipes_item_img{
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+.latest__recipes_item_link{
+    font-size: 14px;
+    font-weight: 500;
+}

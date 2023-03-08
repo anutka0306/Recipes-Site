@@ -44,6 +44,10 @@ class Recipe extends Model
         return $recipes;
     }
 
+    public function getLatestRecipes($count) {
+        return Recipe::with('recipe_cat')->limit($count)->get();
+    }
+
     public function getRecipesByCatName($alias){
         $cat_id = RecipeCategory::select('id')->where('alias', $alias)->first()->id;
         return $this->searchRecipesByCategory($cat_id);

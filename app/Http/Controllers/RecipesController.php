@@ -14,11 +14,22 @@ class RecipesController extends Controller
         "3" => "complex"
     );
     public Recipe $recipe;
+
+    /**
+     * RecipesController constructor.
+     * @param Recipe $recipe
+     * @param \App\Http\Controllers\RecipeCategoryController $recipeCategoryController
+     */
     public function __construct(Recipe $recipe, RecipeCategoryController $recipeCategoryController) {
         $this->recipe = $recipe;
         $this->categories = $recipeCategoryController->getAllCategories();
     }
 
+    /**
+     * @param Request $request
+     * @param Recipe $recipe
+     * @return false
+     */
     public function findRecipeByName(Request $request, Recipe $recipe){
         if(!empty($request->q)){
             $result = $recipe->getRecipesByName($request->q);
@@ -27,6 +38,9 @@ class RecipesController extends Controller
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllRecipes(){
         $recipes = $this->recipe->getAllRecipes();
         foreach ($recipes as $recipe){
@@ -39,6 +53,10 @@ class RecipesController extends Controller
         return $recipes;
     }
 
+    /**
+     * @param Recipe $recipe
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showRecipe(Recipe $recipe){
         $recipe = $this->recipe->getRecipeById($recipe->id);
         $time = $recipe->time;
@@ -52,6 +70,11 @@ class RecipesController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param \App\Http\Controllers\RecipeCategoryController $recipeCategoryController
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function searchRecipes(Request $request, RecipeCategoryController $recipeCategoryController) {
 
         $recipes = null;
@@ -86,20 +109,52 @@ class RecipesController extends Controller
         elseif(isset($ingredient) && $ingredient != '') {
             $recipes = $this->recipe->searchRecipesByIngredient($ingredient);
         }
+        foreach ($recipes as $recipe) {
+            $time = $recipe->time;
+            $time_parts = explode(':', $time);
+            $recipe->hours = (int)$time_parts[0];
+            $recipe->minutes = (int)$time_parts[1];
+            $recipe->difficulty = self::DIFFICULTY[$recipe->difficulty];
+        }
         return view('search/recipes',[
             'recipes' => $recipes,
             'categories' => $this->categories,
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param \App\Http\Controllers\RecipeCategoryController $recipeCategoryController
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showRecipesByCategory(Request $request, RecipeCategoryController $recipeCategoryController) {
         $category_alias = $request->category;
         $current_category = $recipeCategoryController->getCategoryByAlias($category_alias);
         $recipes = $this->recipe->getRecipesByCatName($category_alias);
+        foreach ($recipes as $recipe) {
+            $time = $recipe->time;
+            $time_parts = explode(':', $time);
+            $recipe->hours = (int)$time_parts[0];
+            $recipe->minutes = (int)$time_parts[1];
+            $recipe->difficulty = self::DIFFICULTY[$recipe->difficulty];
+        }
         return view('recipe.category',[
            'recipes' => $recipes,
            'categories' => $this->categories,
             'current_category' => $current_category,
         ]);
+    }
+
+    /**
+     * @param int $count
+     * @return mixed
+     */
+    public function getLatestRecipes(int $count = 5): mixed
+    {
+         $recipes = $this->recipe->getLatestRecipes($count);
+         foreach ($recipes as $recipe){
+             $recipe->image = str_replace('\\', '/', $recipe->image);
+         }
+         return $recipes;
     }
 }
