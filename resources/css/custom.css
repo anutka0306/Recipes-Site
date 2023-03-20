@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 @font-face {
     font-family: 'Native Brush';
     src: url('/public/fonts/Native_Brush/Native_Brush.ttf') format('truetype');
@@ -46,19 +47,37 @@
     color: #1a202c;
 }
 
+#filterCategory, #ingredientAutoComplete, #recipeNameAutoComplete{
+    height: 50px;
+    width: 300px;
+    background-color: rgba(218,215,215,.1);
+    border-color: #2b9061;
+    font-family: Roboto;
+    font-size: 14px;
+}
+.filter__main button{
+    height: 50px;
+    width: 100px;
+}
+
 /* Lastes Recipes */
+.latest__recipes_wrap{
+    background-color: #f1f2f2;
+    border-top: 20px solid #2B9061;
+    border-bottom: 20px solid #2B9061;
+}
 .latest__recipes{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.latest__recipes h2{
+.latest__recipes h2, .h2{
     font-family: 'Native Brush';
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.latest__recipes h2:before{
+.latest__recipes h2:before, .h2:before{
     content: '';
     display: block;
     width: 100px;
@@ -66,7 +85,7 @@
     background-color: #999;
     margin-right: 10px;
 }
-.latest__recipes h2:after{
+.latest__recipes h2:after, .h2:after{
     content: '';
     display: block;
     width: 100px;
@@ -92,4 +111,242 @@
 .latest__recipes_item_link{
     font-size: 14px;
     font-weight: 500;
+}
+
+/* Latest Posts */
+.latest__posts_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.latest__posts_item_img{
+    width: 300px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.latest__posts_item_img:hover{
+    filter: brightness(.5);
+}
+.latest__posts_item_link{
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.latest__posts_item_category{
+    font-size: 13px;
+}
+
+/* Slider Flex */
+.slider-flex{
+    font-family: 'Muli', sans-serif;
+    overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, #ffffff, #cccccc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-flex .container{
+    width: 100%;
+    display: flex;
+    padding: 0 20px;
+}
+.slider-flex .slide{
+    height: 80vh;
+    flex: 1;
+    border-radius: 15px;
+    margin: 0 10px;
+    position: relative;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 500ms ease-in-out;
+}
+.slider-flex .slide h3{
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    opacity: 0;
+    padding: 5px 10px;
+    background: rgba(0,0,0,.6);
+}
+.slider-flex .slide h3 a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+.slider-flex .slide.active{
+    flex: 10;
+}
+.slider-flex .slide.active h3{
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.3s;
+}
+
+/* Cook Now Recipe */
+.cook-now{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+}
+.cook-now:after{
+    content: '';
+    position: absolute;
+    border: 1px solid #fff;
+    left: 0.875rem;
+    top: 0.875rem;
+    right: 0.875rem;
+    bottom: 0.875rem;
+    z-index: auto;
+}
+.cook-now .card{
+    position: relative;
+    z-index: 10;
+}
+.cook-now .card:before{
+    content: 'COOK THIS NOW';
+    padding: 20px 50px;
+    background-color: #2B9061;
+    color: #FFFFFF;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    top: -25px;
+}
+
+/* Post */
+.post__header h1{
+    margin-left: 50px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid;
+    font-family: 'Muli', sans-serif;
+    font-size: 36px;
+    text-transform: capitalize;
+}
+.post__header .post__category{
+    margin-left: 50px;
+}
+
+/* Related Recipes */
+.related__recipes_item{
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+/* Recipe page */
+.recipe__main_photo{
+    height: 250px;
+    object-fit: cover;
+}
+.recipe__detail_image{
+    width: 300px;
+}
+
+@media (max-width: 1400px) {
+    .recipe__detail_image{
+        width: 250px;
+    }
+}
+@media (max-width: 1200px) {
+    .latest__recipes{
+        justify-content: center;
+    }
+    .latest__recipes_item{
+        width: 30%;
+    }
+    .cook-now .card:before{
+        font-size: 14px;
+        width: 80%;
+        padding: 20px 50px;
+        top: -50px;
+    }
+    .cook-now .card{
+        width: 100% !important;
+        padding: 30px 10px !important;
+    }
+    .recipe__item_content_image{
+        width: 50% !important;
+    }
+    .related__recipes_wrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .related__recipes_item{
+        width: 200px !important;
+    }
+}
+@media (max-width: 992px) {
+    .cat__nav_menu button .navbar-toggler-icon{
+        filter: invert(1);
+    }
+    .latest__posts_item > a{
+        display: block;
+        width: 90%;
+    }
+    .latest__posts_item > a .latest__posts_item_img{
+        width: 100%;
+    }
+    .latest__posts_item{
+        justify-content: flex-start;
+    }
+    .recipe__detail_image {
+        width: 200px;
+    }
+    .post__header h1{
+        margin-left: 0;
+        margin-top: 30px;
+    }
+    .post__header{
+        flex-wrap: wrap;
+    }
+    .post__header .post__category{
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .latest__recipes_item{
+        width: 50%;
+    }
+    .cook-now{
+        width: 90%;
+    }
+    .recipe__item_content{
+        flex-wrap: wrap;
+    }
+    .recipe__item_content_image{
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-right: 0 !important;
+    }
+    .recipe__item_meta{
+        flex-wrap: wrap;
+    }
+    .recipe__item_meta_ingredients{
+        width: 100% !important;
+    }
+    .recipe__detail_image {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+}
+@media (max-width: 420px) {
+    .latest__recipes_item{
+        width: 100%;
+    }
 }

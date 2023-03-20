@@ -67,6 +67,7 @@ class RecipesController extends Controller
         return view('recipe/index', [
             'recipe' => $recipe,
             'categories' => $this->categories,
+            'latestRecipes' => $this->getLatestRecipes(6),
         ]);
     }
 
@@ -109,12 +110,14 @@ class RecipesController extends Controller
         elseif(isset($ingredient) && $ingredient != '') {
             $recipes = $this->recipe->searchRecipesByIngredient($ingredient);
         }
-        foreach ($recipes as $recipe) {
-            $time = $recipe->time;
-            $time_parts = explode(':', $time);
-            $recipe->hours = (int)$time_parts[0];
-            $recipe->minutes = (int)$time_parts[1];
-            $recipe->difficulty = self::DIFFICULTY[$recipe->difficulty];
+        if($recipes) {
+            foreach ($recipes as $recipe) {
+                $time = $recipe->time;
+                $time_parts = explode(':', $time);
+                $recipe->hours = (int)$time_parts[0];
+                $recipe->minutes = (int)$time_parts[1];
+                $recipe->difficulty = self::DIFFICULTY[$recipe->difficulty];
+            }
         }
         return view('search/recipes',[
             'recipes' => $recipes,
@@ -156,5 +159,23 @@ class RecipesController extends Controller
              $recipe->image = str_replace('\\', '/', $recipe->image);
          }
          return $recipes;
+    }
+
+    public function getFlexBannerRecipes()
+    {
+        $recipes =  $this->recipe->getFlexBannerRecipes();
+        foreach ($recipes as $recipe){
+            $recipe->banner_photo = str_replace('\\', '/', $recipe->banner_photo);
+        }
+        return $recipes;
+    }
+
+    public function getCookNowRecipe()
+    {
+        $recipe = $this->recipe->getCookNowRecipe();
+        foreach ($recipe as $item) {
+            $item->banner_photo = str_replace('\\', '/', $item->banner_photo);
+        }
+        return $recipe[0];
     }
 }

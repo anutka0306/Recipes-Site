@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\RecipesController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CategoryController;
 
 
 
@@ -30,3 +32,6 @@ Route::post('recipe_name/find', [RecipesController::class, 'findRecipeByName']);
 Route::get('recipe/{recipe}', [RecipesController::class, 'showRecipe'])->name('recipe');
 Route::post('recipes/search', [RecipesController::class, 'searchRecipes'])->name('search-recipes');
 Route::get('recipes/category/{category}', [RecipesController::class, 'showRecipesByCategory'])->name('category-recipes');
+Route::get('post/{post}', [PostsController::class, 'showPost'])->name('post');
+Route::get('blog', [PostsController::class, 'getAllPosts'])->name('blog');
+Route::get('blog/{category}', [CategoryController::class, 'showCategory'])->name('category');

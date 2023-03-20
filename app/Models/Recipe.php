@@ -48,6 +48,21 @@ class Recipe extends Model
         return Recipe::with('recipe_cat')->limit($count)->get();
     }
 
+    public function getFlexBannerRecipes() {
+        return Recipe::where('is_flex_banner', 1)
+            ->where('banner_photo', '!=', null)
+            ->orderBy('banner_order')
+            ->limit(5)
+            ->get();
+    }
+
+    public function getCookNowRecipe() {
+        return Recipe::where('banner_photo', '!=', null)
+            ->inRandomOrder()
+            ->limit(1)
+            ->get();
+    }
+
     public function getRecipesByCatName($alias){
         $cat_id = RecipeCategory::select('id')->where('alias', $alias)->first()->id;
         return $this->searchRecipesByCategory($cat_id);

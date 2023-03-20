@@ -1,6 +1,6 @@
-<div class="bg-body-tertiary">
+<div class="latest__recipes_wrap py-1 my-5">
     <div class="container">
-        <div class="row my-5 py-5 latest__recipes">
+        <div class="row my-5 py-2 latest__recipes">
             <h2 class="text-center">Our Newest Recipes</h2>
             @foreach($recipes as $recipe)
                 <div class="latest__recipes_item p-3 mt-5">

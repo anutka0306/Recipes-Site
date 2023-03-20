@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\RecipeCategoryController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,12 +23,15 @@ class HomeController extends Controller
      * @param \App\Http\Controllers\RecipeCategoryController $categoryController
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function home(Request $request, RecipesController $recipesController, RecipeCategoryController $categoryController)
+    public function home(Request $request, RecipesController $recipesController, RecipeCategoryController $categoryController, PostsController $postsController)
     {
         return view('home/index', [
             'recipes' => $recipesController->getAllRecipes(),
             'categories' => $this->categories,
             'latestRecipes' => $recipesController->getLatestRecipes(5),
+            'posts' => $postsController->getLatestPosts(),
+            'bannerRecipes' => $recipesController->getFlexBannerRecipes(),
+            'cookNow' => $recipesController->getCookNowRecipe(),
         ]);
     }
 }
