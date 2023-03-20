@@ -1,0 +1,30 @@
+{
+  "public/fonts/Native_Brush/Native_Brush.ttf": {
+    "file": "assets/Native_Brush-0ea5e9db.ttf",
+    "src": "public/fonts/Native_Brush/Native_Brush.ttf"
+  },
+  "storage/app/public/main/food-banner.jpg": {
+    "file": "assets/food-banner-695e6643.jpg",
+    "src": "storage/app/public/main/food-banner.jpg"
+  },
+  "resources/css/custom.css": {
+    "file": "assets/custom-71fff04f.css",
+    "src": "resources/css/custom.css",
+    "isEntry": true
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-4ed993c7.js",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/custom.js": {
+    "file": "assets/custom-b79b00e9.js",
+    "src": "resources/js/custom.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-466ce093.js",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
